@@ -10,5 +10,4 @@ RUN apt-get update \
      && apt-get install -y libzip-dev \
      && docker-php-ext-install zip
      
-RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
 
