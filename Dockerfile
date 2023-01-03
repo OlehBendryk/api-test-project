@@ -1,5 +1,7 @@
 FROM php:8.0.2-fpm-buster
 
+RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
+
 RUN apt-get update && apt-get install -y wget \
     && pecl install redis \
     && docker-php-ext-install pdo pdo_mysql \
