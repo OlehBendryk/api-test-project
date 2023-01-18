@@ -12,6 +12,7 @@ services:
     networks:
       - frontend
   api_assignment:
+    container_name: api-test-project
     build: ./
     volumes:
       - ./:/project:cached
