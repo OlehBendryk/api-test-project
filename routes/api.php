@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\PositionsController;
+use App\Http\Controllers\Api\TokenController;
+use App\Http\Controllers\Api\UsersApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['prefix' => '/v1/'], function () {
+    Route::get('token', [TokenController::class, 'token'])->name('token');
+    Route::get('users', [UsersApiController::class, 'index']);
+    Route::post('users', [UsersApiController::class, 'store'])->name('user.api.store');
+    Route::get('users/{id}', [UsersApiController::class, 'show']);
+    Route::get('positions', [PositionsController::class, 'index']);
 });

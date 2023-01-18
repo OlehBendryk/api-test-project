@@ -20,14 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => '/api/v1/'], function () {
-    Route::get('token', [TokenController::class, 'token'])->name('token');
-    Route::get('users', [UsersApiController::class, 'index']);
-    Route::post('users', [UsersApiController::class, 'store'])->name('user.api.store');
-    Route::get('users/{id}', [UsersApiController::class, 'show']);
-    Route::get('positions', [PositionsController::class, 'index']);
-});
-
 Route::resource('users', UsersController::class);
 Route::get('/token', [TokenController::class, 'getRegistrationToken'])->name('registration.token');
 
