@@ -14,7 +14,7 @@ class TokenHelper
     {
         $token = [
             'type' => 'registration',
-            'expired_at' => Carbon::now()->addSeconds(40),
+            'expired_at' => Carbon::now()->addMinutes(40),
         ];
 
         return encrypt($token);

@@ -17,7 +17,6 @@ class UsersValidationErrorsResource extends JsonResource
      */
     public function toArray($request): array
     {
-        dd($this);
         return [
             "success" => false,
             "message" => "Validation failed",

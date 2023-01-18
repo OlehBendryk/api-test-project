@@ -23,13 +23,17 @@
 
                     <div class="col-4 text-right">
                         <a href="{{ route('users.edit', $user) }}" class="btn btn-warning">
-                            <i class="fas fa-pencil-alt"></i> Edit role
+                            <i class="fas fa-pencil-alt"></i> Edit
                         </a>
 
                         <div class="mt-2">
-                            <a href="{{ route('users.destroy', $user) }}" class="btn btn-danger" data-method="DELETE" data-confirm="Ви впевнені, що хочете видалити user {{$user->first_name}} {{$user->last_name}}?">
-                                <i class="fas faw fa-trash-alt "></i>  Remove
-                            </a>
+                            <form action="{{ route('users.destroy', $user) }}" method="post" >
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas faw fa-trash-alt "></i>  Remove
+                                </button>
+                            </form>
                         </div>
 
                     </div>

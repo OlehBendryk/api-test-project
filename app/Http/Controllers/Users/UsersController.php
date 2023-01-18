@@ -73,13 +73,11 @@ class UsersController extends Controller
             return redirect()->route('users.create')
                 ->with('error', "Your token is not correct");
         }
-
         if (User::where('email', $request->get('email'))
             ->orWhere('remember_token', $request->get('token'))->first()) {
             return redirect()->route('users.create')
                 ->with('error', "Such user exist");
         }
-
         $user = DB::transaction(function () use ($request) {
             $photo = $request->file('photo');
 
@@ -88,7 +86,6 @@ class UsersController extends Controller
 
             $tinify->source->toFile(storage_path('app/images/' . $tinify->fileName()));
             $imagePath = Storage::disk('images')->path($tinify->fileName);
-
             $user = new User();
             $user->first_name = ucfirst($request->get('first_name'));
             $user->last_name = ucfirst($request->get('last_name'));
@@ -130,7 +127,6 @@ class UsersController extends Controller
     public function edit($id)
     {
         dd('edit');
-
     }
 
     /**
@@ -151,10 +147,17 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        dd('destroy');
+        if (!$user->id) {
+            return redirect()->route('users.index')
+                ->with('error', "There is not such user");
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index');
     }
 }
