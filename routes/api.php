@@ -23,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => '/v1/'], function () {
     Route::get('token', [TokenController::class, 'token'])->name('token');
-    Route::get('users', [UsersApiController::class, 'index']);
+    Route::get('users', [UsersApiController::class, 'index'])->name('user.api.index');
     Route::post('users', [UsersApiController::class, 'store'])->name('user.api.store');
-    Route::get('users/{id}', [UsersApiController::class, 'show']);
-    Route::get('positions', [PositionsController::class, 'index']);
+    Route::get('users/{id}', [UsersApiController::class, 'show'])->name('user.api.show');
+    Route::get('positions', [PositionsController::class, 'index'])->name('positions.api.index');
 });

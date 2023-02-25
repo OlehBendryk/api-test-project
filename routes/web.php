@@ -21,5 +21,5 @@ Route::get('/', function () {
 });
 
 Route::resource('users', UsersController::class);
-Route::get('/token', [TokenController::class, 'getRegistrationToken'])->name('registration.token');
+Route::get('/token', [TokenController::class, 'token'])->name('registration.token');
 
