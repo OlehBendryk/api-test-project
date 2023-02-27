@@ -74,9 +74,10 @@ class UsersController extends Controller
                 ->with('error', "Your token is not correct");
         }
         if (User::where('email', $request->get('email'))
+            ->orWhere('phone', $request->get('phone'))
             ->orWhere('remember_token', $request->get('token'))->first()) {
             return redirect()->route('users.create')
-                ->with('error', "Such user exist");
+                ->with('error', "Such user with this email or phone exist");
         }
         $user = DB::transaction(function () use ($request) {
             $photo = $request->file('photo');

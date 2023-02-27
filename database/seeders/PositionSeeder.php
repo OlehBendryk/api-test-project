@@ -14,6 +14,12 @@ class PositionSeeder extends Seeder
      */
     public function run()
     {
-        Position::factory(4)->create();
+        $positions = ['Security', 'Designer', 'Content manager', 'Lawyer'];
+
+        foreach ($positions as $position) {
+            Position::create([
+                'name' => $position,
+            ]);
+        }
     }
 }
