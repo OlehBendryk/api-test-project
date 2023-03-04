@@ -20,11 +20,6 @@ class NotFoundResource extends JsonResource
         return [
             "success" => false,
             "message" => $this->resource,
-            "fails" => [
-                "user_id" => [
-                    "User not found"
-                ]
-            ]
         ];
     }
 
