@@ -30,7 +30,6 @@ class UsersApiController extends Controller
             'page' => 'required|integer|min:1',
             'count' => 'required|integer|min:1',
         ]);
-
         if ($validator->fails()) {
             return new UsersValidationErrorsResource($validator->errors());
         }
@@ -52,7 +51,8 @@ class UsersApiController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make(
+            $request->all(), [
             'first_name' => 'required|min:2|max:60',
             'last_name' => 'required|min:2|max:60',
             'gender' => 'required|in:Male,Female',
@@ -61,15 +61,17 @@ class UsersApiController extends Controller
             'photo' => 'required|image|mimes:jpeg,jpg|max:5120',
             'position_id' => 'required|integer|exists:positions,id',
             'remember_token' => 'required|string',
-        ]);
-
+        ],
+        [
+            'photo.max' => 'The photo may not be greater than 5 Mbytes.',
+        ]
+        );
         if ($validator->fails()) {
             return new UsersValidationErrorsResource($validator->errors());
         }
 
         if (User::where('email', $request->get('email'))
             ->orWhere('phone', $request->get('phone'))->first()) {
-
             return new UserExistResource('User with this phone or email already exist');
         }
 
