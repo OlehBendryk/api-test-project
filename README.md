@@ -1,6 +1,6 @@
 ## Implementation REST API server
 - Data generation / seeders
-- Integrate optimization images using the [tinypng.com](https://tinypng.com/) 
+- Integrated optimization images using the [tinypng.com](https://tinypng.com/) 
 
 
 ## How to run this?
